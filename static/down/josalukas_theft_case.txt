@@ -1,0 +1,45 @@
+THEFT CASE REPORT - JOSALUKAS JEWELRY STORE
+Case Number: JL-2023-001
+Date of Incident: November 15, 2023
+Time of Incident: 02:30 AM
+ 
+INCIDENT DETAILS:
+Location: Josalukas Jewelry Store
+Address: 123 Main Street, Downtown
+
+DESCRIPTION:
+A break-in occurred at Josalukas Jewelry Store during early morning hours. Perpetrators gained access through the rear service entrance by disabling the security system. Approximately $500,000 worth of jewelry was stolen from the main display cases.
+
+EVIDENCE COLLECTED:
+1. Surveillance footage from store cameras (02:15 AM - 02:45 AM)
+2. Fingerprints from display cases and rear entrance
+3. Digital photographs of point of entry
+4. Security system log files
+5. Witness statements from neighboring businesses
+
+INVESTIGATING OFFICERS:
+Lead Detective: Sarah Johnson
+Badge Number: 45892
+Department: Criminal Investigation Division
+
+WITNESS INFORMATION:
+1. Security Guard (Night Shift)
+   Name: Michael Rodriguez
+   Contact: 555-0123
+
+2. Store Owner
+   Name: Joseph Lukas
+   Contact: 555-0456
+
+PRELIMINARY FINDINGS:
+- Professional job indicating organized crime involvement
+- No alarm triggered during entry
+- Surveillance system partially disabled
+- Multiple perpetrators (estimated 3-4 individuals)
+- Vehicle identified: Dark colored van, partial plate captured
+
+CHAIN OF CUSTODY REQUIREMENTS:
+- All digital evidence must be hashed and verified
+- Access restricted to authorized personnel only
+- All evidence transfers must be logged and timestamped
+- Blockchain verification required for all digital assets

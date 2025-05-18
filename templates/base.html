@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Chain of Custody{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Chain of Custody System{% endblock %}">
+
+    <meta property="og:title" content="{% block og_title %}Chain of Custody{% endblock %}"/>
+    <meta property="og:image" content="../static/images/og-image.jpg"/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content="Chain of Custody"/>
+    <meta property="og:description" content="{% block og_description %}Chain of Custody System{% endblock %}"/>
+    <meta name="twitter:title" content="{% block twitter_title %}Chain of Custody{% endblock %}" />
+    <meta name="twitter:image" content="../static/images/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #f8f9fa;
+            --dark-color: #003333;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            background-color: var(--light-color);
+        }
+
+ 
+        #ftco-footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        #ftco-footer h4 {
+            color: var(--light-color);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        #ftco-footer p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .ftco-footer-links {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .ftco-footer-links li {
+            padding: 0.5rem 0;
+        }
+
+        .ftco-footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .ftco-footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .row-pb-md {
+            padding-bottom: 3rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .ftco-social-icons {
+            padding: 0;
+            margin: 1rem 0 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .ftco-social-icons li a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .ftco-social-icons li a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            #ftco-footer {
+                padding: 3rem 0 1rem;
+            }
+
+            .row-pb-md {
+                padding-bottom: 2rem;
+            }
+
+            #ftco-footer h4 {
+                margin-top: 1.5rem;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Chain of Custody</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% block navigation %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login_auth">Authorized Parties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Government Regulator</a>
+                    </li>
+                    {% endblock %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer id="ftco-footer" role="contentinfo">
+        <div class="container">
+            <div class="row row-pb-md">
+                <div class="col-md-3 ftco-widget">
+                    <h4>Chain of Custody</h4>
+                    <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+                </div>
+                <div class="col-md-6 col-md-push-1">
+                    <h4>Contact Information</h4>
+                    <ul class="ftco-footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Tamilnadu, India</li>
+                        <li><i class="fas fa-phone me-2"></i><a href="tel://1234567920">+ 1235 2355 98</a></li>
+                        <li><i class="fas fa-envelope me-2"></i><a href="mailto:coc@info.com">coc@info.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row copyright">
+                <div class="col-md-12 text-center">
+                    <p>
+                        Chain of Custody  <a href="https://colorlib.com" target="_blank"></a>
+                    </p>
+                    <p>
+                        <ul class="ftco-social-icons">
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fab fa-github"></i></a></li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

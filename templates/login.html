@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Government Regulator Login - Chain of Custody</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Government Regulator Login for Chain of Custody System">
+ 
+  <meta property="og:title" content="Government Regulator Login - Chain of Custody"/>
+  <meta property="og:image" content="../static/images/og-image.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content="Chain of Custody"/>
+  <meta property="og:description" content="Secure login portal for government regulators to access the Chain of Custody system"/>
+  <meta name="twitter:title" content="Government Regulator Login - Chain of Custody" />
+  <meta name="twitter:image" content="../static/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #003333;
+      --gov-color: #27ae60;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      background-color: var(--light-color);
+    }
+     
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background-color: var(--dark-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .navbar-brand:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: white;
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      color: white;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+     
+    .login-section {
+      padding: 130px 0 40px 0;
+      min-height: calc(100vh - 300px);
+      display: flex;
+      align-items: center;
+    }
+    
+    .login-image {
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      width: 600px;
+    }
+    
+    .login-image:hover {
+    
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .login-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .login-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--gov-color);
+    }
+    
+    .form-label {
+      font-weight: 500;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+      height: 50px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--gov-color);
+      box-shadow: 0 0 0 0.25rem rgba(39, 174, 96, 0.25);
+    }
+    
+    .login-btn {
+      height: 50px;
+      border-radius: 8px;
+      background-color: var(--gov-color);
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .login-btn:hover {
+      background-color: #219653;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .error-message {
+      color: var(--accent-color);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: rgba(231, 76, 60, 0.1);
+      border-left: 3px solid var(--accent-color);
+    }
+     
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-widget {
+      margin-bottom: 40px;
+    }
+    
+    .footer-widget h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-widget h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-widget p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .social-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .social-icons li {
+      margin-right: 15px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    .copyright p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+     
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+     
+    .login-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      transition: all 0.3s ease;
+      border-top: 5px solid var(--gov-color);
+    }
+    
+    .login-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+     
+    .gov-badge {
+      display: inline-block;
+      background-color: var(--gov-color);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 15px;
+      border-radius: 50px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+     
+    @media (max-width: 991px) {
+      .login-content {
+        margin-top: 40px;
+      }
+      
+      .login-section {
+        padding: 80px 0;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .login-section {
+        padding: 60px 0;
+      }
+      
+      .login-card {
+        padding: 30px;
+      }
+      
+      .login-content h2 {
+        font-size: 2rem;
+      }
+    }
+     
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fadeInUp {
+      animation: fadeInUp 1s ease;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+<body> 
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Chain of Custody</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login_auth">Authorized Parties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/login">Government Regulator</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  <section class="login-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 fadeInUp">
+          <img src="../static/images/coc3.jpg" alt="Chain of Custody System" class="login-image img-fluid">
+        </div>
+        <div class="col-lg-6 fadeInUp delay-1">
+          <div class="login-card">
+            <div class="login-content">
+              <div class="gov-badge">Official Access</div>
+              <h2>Government Regulator</h2>
+               
+              {% if msg %}
+              <div class="error-message fadeInUp delay-2">
+                {{msg}}
+              </div>
+              {% endif %}
+          
+              <form name="form1" method="post" class="fadeInUp delay-2">
+                <div class="mb-4">
+                  <label for="username" class="form-label">Username</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
+                    <input type="text" id="username" name="uname" class="form-control" placeholder="Enter your username" required>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <label for="password" class="form-label">Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" id="password" name="pass" class="form-control" placeholder="Enter your password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="fas fa-eye" id="eyeIcon"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="mb-4 form-check">
+                  <input type="checkbox" class="form-check-input" id="rememberMe">
+                  <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div>
+                
+                <div class="mb-4">
+                  <button type="submit" name="btn" class="login-btn">
+                    <i class="fas fa-sign-in-alt me-2"></i> Secure Login
+                  </button>
+                </div>
+                
+                <div class="text-center">
+                  <p class="mb-0">Need assistance? <a href="#" class="text-success">Contact administrator</a></p>
+                </div>
+              </form>
+              
+              <div class="mt-4 text-center fadeInUp delay-3">
+                <div class="d-flex align-items-center justify-content-center">
+                  <i class="fas fa-shield-alt text-success me-2"></i>
+                  <small class="text-muted">Government-secured access portal</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Chain of Custody</h4>
+            <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+            <ul class="social-icons mt-4">
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="/login"><i class="fas fa-chevron-right"></i> Government Regulator</a></li>
+              <li><a href="/login_auth"><i class="fas fa-chevron-right"></i> Authorized Parties</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right"></i> Regulatory Compliance</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Our Services</h4>
+            <ul class="footer-links">
+              <li><a href="/digital-evidence-management"><i class="fas fa-chevron-right"></i> Digital Evidence Management</a></li>
+              <li><a href="/forensic-analysis"><i class="fas fa-chevron-right"></i> Forensic Analysis</a></li>
+              <li><a href="/blockchain-solutions"><i class="fas fa-chevron-right"></i> Blockchain Solutions</a></li>
+              <li><a href="/security-consulting"><i class="fas fa-chevron-right"></i> Security Consulting</a></li>
+              <li><a href="/training-certification"><i class="fas fa-chevron-right"></i> Training & Certification</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Tamilnadu, India</li>
+              <li><i class="fas fa-phone"></i> <a href="tel://1234567920">+ 1235 2355 98</a></li>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:info@chainofcustody.com">info@chainofcustody.com</a></li>
+              <li><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>© 2025 Chain of Custody. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+ 
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+  <script> 
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').addClass('active');
+      } else {
+        $('.back-to-top').removeClass('active');
+      }
+    });
+    
+    $('.back-to-top').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+     
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const eyeIcon = document.getElementById('eyeIcon');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    });
+     
+    $(document).ready(function() { 
+      $('.fadeInUp').addClass('fadeInUp');
+    });
+  </script>
+</body>
+</html>

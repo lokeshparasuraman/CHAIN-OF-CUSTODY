@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>View Authorized Parties - Chain of Custody</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View Authorized Parties in the Chain of Custody System">
+
+   
+  <meta property="og:title" content="View Authorized Parties - Chain of Custody"/>
+  <meta property="og:image" content="../static/images/og-image.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content="Chain of Custody"/>
+  <meta property="og:description" content="View Authorized Parties in the Chain of Custody System"/>
+  <meta name="twitter:title" content="View Authorized Parties - Chain of Custody" />
+  <meta name="twitter:image" content="../static/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+   
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #003333;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --info-color: #3498db;
+      --danger-color: #e74c3c;
+      --gov-color: #27ae60;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      background-color: var(--light-color);
+    }
+    
+    
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background-color: var(--dark-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .navbar-brand:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: white;
+    }
+    
+  
+    
+    .navbar-toggler {
+      border: none;
+      color: white;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    
+    .dropdown-menu {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+      margin-top: 15px;
+    }
+    
+    .dropdown-item {
+      padding: 10px 25px;
+      font-weight: 500;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: var(--primary-color);
+      padding-left: 30px;
+    }
+    
+    .dropdown-item i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    
+    .auth-section {
+      padding: 100px 0;
+    }
+    
+    .section-title {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 15px;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--gov-color);
+    }
+    
+    .section-title p {
+      font-size: 1.1rem;
+      color: #777;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    
+    .auth-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 25px;
+      margin-bottom: 30px;
+      height: 100%;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .auth-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background-color: var(--gov-color);
+    }
+    
+    .auth-card-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: rgba(39, 174, 96, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    
+    .auth-card-icon i {
+      font-size: 30px;
+      color: var(--gov-color);
+    }
+    
+    .auth-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .auth-card-info {
+      margin-bottom: 20px;
+    }
+    
+    .auth-card-info-item {
+      display: flex;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+    
+    .auth-card-info-label {
+      font-weight: 600;
+      color: var(--secondary-color);
+      min-width: 100px;
+      margin-right: 10px;
+    }
+    
+    .auth-card-info-value {
+      color: #555;
+      flex: 1;
+      word-break: break-word;
+    }
+    
+    .auth-card-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .auth-card-action-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .auth-card-action-btn i {
+      margin-right: 8px;
+    }
+    
+    .auth-card-action-btn.delete {
+      background-color: rgba(231, 76, 60, 0.1);
+      color: var(--danger-color);
+    }
+    
+    .auth-card-action-btn.delete:hover {
+      background-color: var(--danger-color);
+      color: white;
+    }
+    
+    .auth-card-action-btn.edit {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: var(--primary-color);
+      margin-right: 10px;
+    }
+    
+    .auth-card-action-btn.edit:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .auth-card-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background-color: rgba(39, 174, 96, 0.1);
+      color: var(--gov-color);
+    }
+    
+    
+    .add-auth-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--gov-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 99;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .add-auth-btn:hover {
+      background-color: #219653;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      color: white;
+    }
+    
+    
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    
+    .empty-state-icon {
+      font-size: 5rem;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+    
+    .empty-state h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    
+    .empty-state p {
+      color: #777;
+      margin-bottom: 25px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .empty-state-btn {
+      padding: 12px 30px;
+      border-radius: 50px;
+      background-color: var(--gov-color);
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .empty-state-btn i {
+      margin-right: 10px;
+    }
+    
+    .empty-state-btn:hover {
+      background-color: #219653;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+    
+    
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-widget {
+      margin-bottom: 40px;
+    }
+    
+    .footer-widget h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-widget h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-widget p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .social-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .social-icons li {
+      margin-right: 15px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    .copyright p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 991px) {
+      .auth-section {
+        padding: 80px 0;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .auth-section {
+        padding: 60px 0;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .auth-card {
+        padding: 20px;
+      }
+      
+      .auth-card-info-label {
+        min-width: 80px;
+      }
+    }
+    
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fadeInUp {
+      animation: fadeInUp 1s ease;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+    
+    
+    .modal-content {
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .modal-header {
+      border-bottom: none;
+      padding: 20px 25px 0;
+    }
+    
+    .modal-title {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+    
+    .modal-body {
+      padding: 20px 25px;
+    }
+    
+    .modal-footer {
+      border-top: none;
+      padding: 0 25px 20px;
+    }
+    
+    .btn-modal-cancel {
+      background-color: #f1f1f1;
+      color: #555;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-modal-cancel:hover {
+      background-color: #e5e5e5;
+    }
+    
+    .btn-modal-delete {
+      background-color: var(--danger-color);
+      color: white;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-modal-delete:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/admin">Government Regulator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Case Management
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/add_case"><i class="fas fa-plus-circle"></i> Register Case</a></li>
+              <li><a class="dropdown-item" href="/view_case"><i class="fas fa-list"></i> View Cases</a></li>
+              <li><a class="dropdown-item" href="/add_auth"><i class="fas fa-user-plus"></i> Create Authorized Parties</a></li>
+              <li><a class="dropdown-item" href="/view_auth"><i class="fas fa-users"></i> View Authorized Parties</a></li>
+              <li><a class="dropdown-item" href="/view_req"><i class="fas fa-envelope"></i> Requests</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/verify">Verify Evidence Integrity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ 
+  <section class="auth-section">
+    <div class="container">
+      <div class="section-title fadeInUp">
+        <h2>Authorized Parties</h2>
+        <p>View and manage all authorized parties who have access to the Chain of Custody system</p>
+      </div>
+      
+      <div class="row">
+        {% if data %}
+          {% for rs in data %}
+            <div class="col-lg-4 col-md-6 fadeInUp delay-{{ loop.index % 3 + 1 }}">
+              <div class="auth-card">
+                <div class="auth-card-badge">ID: {{rs[8]}}</div>
+                <div class="auth-card-icon">
+                  <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>{{rs[1]}}</h3>
+                <div class="auth-card-info">
+                  <div class="auth-card-info-item">
+                    <div class="auth-card-info-label">Role:</div>
+                    <div class="auth-card-info-value">{{rs[2]}}</div>
+                  </div>
+                  <div class="auth-card-info-item">
+                    <div class="auth-card-info-label">Mobile:</div>
+                    <div class="auth-card-info-value">{{rs[3]}}</div>
+                  </div>
+                  <div class="auth-card-info-item">
+                    <div class="auth-card-info-label">Email:</div>
+                    <div class="auth-card-info-value">{{rs[4]}}</div>
+                  </div>
+                  <div class="auth-card-info-item">
+                    <div class="auth-card-info-label">Aadhar No:</div>
+                    <div class="auth-card-info-value">{{rs[5]}}</div>
+                  </div>
+                  <div class="auth-card-info-item">
+                    <div class="auth-card-info-label">Location:</div>
+                    <div class="auth-card-info-value">{{rs[6]}}, {{rs[7]}}</div>
+                  </div>
+                </div>
+                <div class="auth-card-actions">
+                  <a href="#" class="auth-card-action-btn edit" data-bs-toggle="modal" data-bs-target="#editModal{{rs[0]}}">
+                    <i class="fas fa-edit"></i> Edit
+                  </a>
+                  <a href="#" class="auth-card-action-btn delete" data-bs-toggle="modal" data-bs-target="#deleteModal{{rs[0]}}">
+                    <i class="fas fa-trash-alt"></i> Delete
+                  </a>
+                </div>
+              </div>
+              
+              
+              <div class="modal fade" id="deleteModal{{rs[0]}}" tabindex="-1" aria-labelledby="deleteModalLabel{{rs[0]}}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="deleteModalLabel{{rs[0]}}">Confirm Deletion</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete <strong>{{rs[1]}}</strong> from authorized parties?</p>
+                      <p class="text-danger"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-modal-cancel" data-bs-dismiss="modal">Cancel</button>
+                      <a href="/view_auth?act=del&did={{rs[0]}}" class="btn btn-modal-delete">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-12">
+            <div class="empty-state">
+              <div class="empty-state-icon">
+                <i class="fas fa-users-slash"></i>
+              </div>
+              <h3>No Authorized Parties Found</h3>
+              <p>There are currently no authorized parties in the system. Click the button below to create your first authorized party.</p>
+              <a href="/add_auth" class="empty-state-btn">
+                <i class="fas fa-user-plus"></i> Create Authorized Party
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  
+  
+  <a href="/add_auth" class="add-auth-btn" title="Add New Authorized Party">
+    <i class="fas fa-plus"></i>
+  </a>
+
+
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Chain of Custody</h4>
+            <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+            <ul class="social-icons mt-4">
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/admin"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="/add_case"><i class="fas fa-chevron-right"></i> Register Case</a></li>
+              <li><a href="/view_case"><i class="fas fa-chevron-right"></i> View Cases</a></li>
+              <li><a href="/verify"><i class="fas fa-chevron-right"></i> Verify Evidence</a></li>
+              <li><a href="/logout"><i class="fas fa-chevron-right"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="footer-widget">
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Tamilnadu, India</li>
+              <li><i class="fas fa-phone"></i> <a href="tel://1234567920">+ 1235 2355 98</a></li>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:coc@info.com">coc@info.com</a></li>
+              <li><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>© 2025 Chain of Custody. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+
+  <script>
+   
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').addClass('active');
+      } else {
+        $('.back-to-top').removeClass('active');
+      }
+    });
+    
+    $('.back-to-top').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+    
+    
+    $(document).ready(function() {
+ 
+      $('.fadeInUp').addClass('fadeInUp');
+    });
+  </script>
+</body>
+</html>

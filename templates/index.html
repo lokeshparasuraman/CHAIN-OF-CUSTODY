@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chain of Custody - Digital Evidence Security</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics">
+
+  <meta property="og:title" content="Chain of Custody - Digital Evidence Security"/>
+  <meta property="og:image" content="../static/images/og-image.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content="Chain of Custody"/>
+  <meta property="og:description" content="FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics"/>
+  <meta name="twitter:title" content="Chain of Custody - Digital Evidence Security" />
+  <meta name="twitter:image" content="../static/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static/css/animate.css">
+  
+  <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+  
+  
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+    
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: var(--secondary-color);
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--primary-color);
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    
+    .hero-section {
+      height: 100vh;
+      min-height: 600px;
+      background-color: var(--secondary-color);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-slide {
+      height: 100vh;
+      min-height: 500px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+	  backdrop-filter: blur(1px);
+	  background: rgba(20, 20, 20, 0.6);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 15px;
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease 0.2s;
+      animation-fill-mode: both;
+    }
+    
+    .hero-btn {
+      padding: 12px 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease 0.4s;
+      animation-fill-mode: both;
+    }
+    
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+     
+    .about-section {
+      padding: 100px 0;
+      background-color: var(--light-color);
+    }
+    
+    .about-img {
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .about-img:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .about-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .about-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+    
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    
+     
+    .features-section {
+      padding: 100px 0;
+      background-color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+    
+    .section-title p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .feature-card {
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+      background-color: white;
+      text-align: center;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    
+    .feature-desc {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+     
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-widget {
+      margin-bottom: 40px;
+    }
+    
+    .footer-widget h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-widget h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-widget p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .social-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .social-icons li {
+      margin-right: 15px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    .copyright p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+     
+   
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    
+     
+    @media (max-width: 991px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .about-content {
+        margin-top: 40px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .feature-card {
+        margin-bottom: 30px;
+      }
+    }
+    
+     
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+ 
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Chain of Custody</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login_auth">Authorized Parties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Government Regulator</a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  <section class="hero-section">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="hero-slide" style="background-image: url('../static/images/hero_1.jpg ');">
+            <div class="hero-overlay"></div>
+            <div class="container h-100 d-flex align-items-center">
+              <div class="hero-content text-center mx-auto">
+                <h1 class="hero-title">FB-CoC: Fuzzy Hash Blockchain based Chain of Custody</h1>
+                <p class="hero-subtitle">Secure Digital Evidence for Multimedia Forensics with Advanced Blockchain Technology</p>
+                <a href="#about" class="btn btn-primary hero-btn">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="hero-slide" style="background-image: url('../static/images/2.0.jpeg');">
+            <div class="hero-overlay"></div>
+            <div class="container h-100 d-flex align-items-center">
+              <div class="hero-content text-center mx-auto">
+                <h1 class="hero-title">Secure Digital Evidence Management</h1>
+                <p class="hero-subtitle">Ensuring the integrity and authenticity of digital evidence through blockchain technology</p>
+                <a href="#features" class="btn btn-primary hero-btn">Explore Features</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="hero-slide" style="background-image: url('../static/images/4.0.jpg');">
+            <div class="hero-overlay"></div>
+            <div class="container h-100 d-flex align-items-center">
+              <div class="hero-content text-center mx-auto">
+                <h1 class="hero-title">Trusted by Law Enforcement Agencies</h1>
+                <p class="hero-subtitle">Providing a reliable chain of custody solution for digital evidence in legal proceedings</p>
+                <a href="#contact" class="btn btn-primary hero-btn">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+
+ 
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+          <img src="../static/images/coc3.jpg" alt="Chain of Custody System" class="about-img img-fluid">
+        </div>
+        <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.4s">
+          <div class="about-content">
+            <h2>Welcome To Chain of Custody</h2>
+            <p>Chain of custody is a critical process used to track the movement and control of digital evidence throughout its lifecycle. Our system documents each person and organization who handles the evidence, the date/time it was collected or transferred, and the purpose of the transfer.</p>
+            <p>Using advanced blockchain technology and fuzzy hashing algorithms, our FB-CoC system ensures that digital evidence remains tamper-proof and verifiable, meeting the highest standards required for legal proceedings and forensic investigations.</p>
+            <a href="#" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-title wow fadeInUp" data-wow-delay="0.2s">
+        <h2>Key Features</h2>
+        <p>Our blockchain-based chain of custody system offers several advanced features to ensure the security and integrity of digital evidence.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-fingerprint"></i>
+            </div>
+            <h3 class="feature-title">Fuzzy Hashing</h3>
+            <p class="feature-desc">Our system uses advanced fuzzy hashing algorithms to create unique digital fingerprints for evidence, allowing for similarity matching even when files are slightly modified.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-link"></i>
+            </div>
+            <h3 class="feature-title">Blockchain Security</h3>
+            <p class="feature-desc">All evidence transfers and handling events are recorded on an immutable blockchain, ensuring a tamper-proof record of the entire chain of custody.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <h3 class="feature-title">Access Control</h3>
+            <p class="feature-desc">Role-based access control ensures that only authorized personnel can access, transfer, or modify digital evidence, with all actions being logged and verified.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp mt-2" data-wow-delay="0.6s">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-history"></i>
+            </div>
+            <h3 class="feature-title">Complete Audit Trail</h3>
+            <p class="feature-desc">Every interaction with digital evidence is recorded with timestamps, user information, and purpose, creating a comprehensive audit trail for legal proceedings.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp mt-2" data-wow-delay="0.7s">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-file-signature"></i>
+            </div>
+            <h3 class="feature-title">Digital Signatures</h3>
+            <p class="feature-desc">Cryptographic signatures verify the authenticity of each transaction and transfer, ensuring non-repudiation throughout the evidence lifecycle.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp mt-2" data-wow-delay="0.8s">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <h3 class="feature-title">Legal Compliance</h3>
+            <p class="feature-desc">Our system is designed to meet the stringent requirements of legal and regulatory frameworks for digital evidence handling and presentation in court.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer id="contact" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Chain of Custody</h4>
+            <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+            <ul class="social-icons mt-4">
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="/login"><i class="fas fa-chevron-right"></i> Government Regulator</a></li>
+              <li><a href="/login_auth"><i class="fas fa-chevron-right"></i> Authorized Parties</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Our Services</h4>
+            <ul class="footer-links">
+              <li><a href="/digital-evidence-management"><i class="fas fa-chevron-right"></i> Digital Evidence Management</a></li>
+              <li><a href="/forensic-analysis"><i class="fas fa-chevron-right"></i> Forensic Analysis</a></li>
+              <li><a href="/blockchain-solutions"><i class="fas fa-chevron-right"></i> Blockchain Solutions</a></li>
+              <li><a href="/security-consulting"><i class="fas fa-chevron-right"></i> Security Consulting</a></li>
+              <li><a href="/training-certification"><i class="fas fa-chevron-right"></i> Training & Certification</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Tamilnadu, India</li>
+              <li><i class="fas fa-phone"></i> <a href="tel://1234567920">+ 1235 2355 98</a></li>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:info@chainofcustody.com">info@chainofcustody.com</a></li>
+              <li><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>© 2025 Chain of Custody. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+ 
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+   
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+ 
+  <script>
+     
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').addClass('active');
+      } else {
+        $('.back-to-top').removeClass('active');
+      }
+    });
+    
+    $('.back-to-top').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+    
+   
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 50) {
+        $('.navbar').css('padding', '0.5rem 0');
+        $('.navbar').css('box-shadow', '0 2px 10px rgba(0, 0, 0, 0.1)');
+      } else {
+        $('.navbar').css('padding', '1rem 0');
+        $('.navbar').css('box-shadow', 'none');
+      }
+    });
+    
+ 
+    $('a[href*="#"]:not([href="#"])').click(function() {
+      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top - 70
+          }, 1000);
+          return false;
+        }
+      }
+    });
+    
+ 
+    $(document).ready(function() {
+      $('.wow').addClass('wow');
+    });
+  </script>
+</body>
+</html>

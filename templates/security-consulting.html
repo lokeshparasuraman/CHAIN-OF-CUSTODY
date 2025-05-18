@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Security Consulting - Chain of Custody</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Security Consulting Services by Chain of Custody">
+
+  <meta property="og:title" content="Security Consulting - Chain of Custody"/>
+  <meta property="og:image" content="../static/images/og-image.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content="Chain of Custody"/>
+  <meta property="og:description" content="Security Consulting Services by Chain of Custody"/>
+  <meta name="twitter:title" content="Security Consulting - Chain of Custody" />
+  <meta name="twitter:image" content="../static/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #003333;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --info-color: #3498db;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      background-color: var(--light-color);
+    }
+    
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background-color: var(--dark-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .navbar-brand:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: white;
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      color: white;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    .service-header {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 100px 0 50px;
+      position: relative;
+    }
+    
+    .service-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f8f9fa' fill-opacity='1' d='M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .service-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .service-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    .service-section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    
+    .feature-desc {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .service-item {
+      display: flex;
+      margin-bottom: 30px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .service-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 2rem;
+    }
+    
+    .service-content {
+      padding: 25px;
+      flex: 1;
+    }
+    
+    .service-content h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+    }
+    
+    .service-content p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .testimonial-content {
+      font-style: italic;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      position: relative;
+      padding: 0 20px;
+    }
+    
+    .testimonial-content::before {
+      content: '\201C';
+      font-size: 4rem;
+      font-family: Georgia, serif;
+      color: var(--primary-color);
+      opacity: 0.2;
+      position: absolute;
+      top: -20px;
+      left: -10px;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .testimonial-author img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 5px;
+    }
+    
+    .author-info p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+    }
+    
+    .cta-section {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+    
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-desc {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    .cta-btn {
+      background-color: white;
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-btn:hover {
+      background-color: var(--secondary-color);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-widget {
+      margin-bottom: 40px;
+    }
+    
+    .footer-widget h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-widget h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-widget p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .social-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .social-icons li {
+      margin-right: 15px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    .copyright p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    
+    @media (max-width: 991px) {
+      .service-title {
+        font-size: 2rem;
+      }
+      
+      .service-section {
+        padding: 60px 0;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .service-icon {
+        width: 80px;
+        font-size: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .service-title {
+        font-size: 1.8rem;
+      }
+      
+      .service-subtitle {
+        font-size: 1rem;
+      }
+      
+      .feature-card {
+        margin-bottom: 30px;
+      }
+      
+      .cta-title {
+        font-size: 1.8rem;
+      }
+      
+      .cta-desc {
+        font-size: 1rem;
+      }
+      
+      .service-item {
+        flex-direction: column;
+      }
+      
+      .service-icon {
+        width: 100%;
+        height: 80px;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fadeInUp {
+      animation: fadeInUp 1s ease;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Chain of Custody</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login_auth">Authorized Parties</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Government Regulator</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="service-header text-center">
+    <div class="container">
+      <h1 class="service-title fadeInUp">Security Consulting</h1>
+      <p class="service-subtitle fadeInUp delay-1">Expert guidance and solutions for securing your digital evidence and forensic processes</p>
+    </div>
+  </header>
+
+  <section class="service-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 fadeInUp">
+          <img src="../static/images/coc44.jpg" alt="Security Consulting" class="img-fluid rounded-3 shadow">
+        </div>
+        <div class="col-lg-6 fadeInUp delay-1">
+          <h2 class="section-title">Expert Security Consulting</h2>
+          <p>Our Security Consulting services provide expert guidance and solutions to help organizations secure their digital evidence and forensic processes. With a team of experienced security professionals, we offer comprehensive consulting services tailored to the unique requirements of digital forensics and evidence management.</p>
+          <p>We understand the critical importance of maintaining the integrity, confidentiality, and availability of digital evidence throughout its lifecycle. Our consultants work closely with your team to identify potential vulnerabilities, develop robust security strategies, and implement effective controls to protect your digital evidence from unauthorized access, tampering, or loss.</p>
+          <p>Whether you're a law enforcement agency, legal firm, or corporate investigation unit, our security consulting services can help you establish and maintain a secure environment for handling digital evidence in compliance with legal and regulatory requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-section bg-light">
+    <div class="container">
+      <div class="text-center mb-5 fadeInUp">
+        <h2 class="section-title mx-auto" style="width: fit-content;">Our Consulting Services</h2>
+        <p class="lead">Comprehensive security solutions for digital evidence management</p>
+      </div>
+      
+      <div class="service-item fadeInUp">
+        <div class="service-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="service-content">
+          <h3>Security Assessments</h3>
+          <p>Comprehensive evaluation of your current digital evidence management systems and processes to identify vulnerabilities, assess risks, and recommend security improvements. Our assessments cover technical, physical, and administrative controls to ensure a holistic approach to security.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+      
+      <div class="service-item fadeInUp delay-1">
+        <div class="service-icon">
+          <i class="fas fa-sitemap"></i>
+        </div>
+        <div class="service-content">
+          <h3>Security Architecture Design</h3>
+          <p>Expert design of secure architectures for digital evidence management systems, incorporating defense-in-depth strategies, secure communication channels, access controls, and encryption mechanisms to protect evidence throughout its lifecycle.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+      
+      <div class="service-item fadeInUp delay-2">
+        <div class="service-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="service-content">
+          <h3>Policy & Procedure Development</h3>
+          <p>Development of comprehensive security policies, procedures, and guidelines for digital evidence handling, storage, and transfer. Our consultants ensure that your documentation aligns with legal requirements and industry best practices.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+      
+      <div class="service-item fadeInUp delay-3">
+        <div class="service-icon">
+          <i class="fas fa-users-cog"></i>
+        </div>
+        <div class="service-content">
+          <h3>Security Awareness Training</h3>
+          <p>Customized training programs to educate your staff on security best practices for handling digital evidence, recognizing security threats, and responding to security incidents. Our training helps build a security-conscious culture within your organization.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+      
+      <div class="service-item fadeInUp delay-3">
+        <div class="service-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="service-content">
+          <h3>Compliance & Audit Support</h3>
+          <p>Expert guidance to help your organization meet legal and regulatory requirements for digital evidence handling. Our consultants can assist with audit preparation, compliance assessments, and remediation planning to address compliance gaps.</p>
+          <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-section">
+    <div class="container">
+      <div class="text-center mb-5 fadeInUp">
+        <h2 class="section-title mx-auto" style="width: fit-content;">Our Approach</h2>
+        <p class="lead">A methodical approach to security consulting</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4 fadeInUp">
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3 class="feature-title">Assess</h3>
+            <p class="feature-desc">Thorough assessment of your current security posture, identifying vulnerabilities and risks in your digital evidence management processes.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 fadeInUp delay-1">
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <i class="fas fa-drafting-compass"></i>
+            </div>
+            <h3 class="feature-title">Plan</h3>
+            <p class="feature-desc">Development of a comprehensive security strategy and roadmap tailored to your organization's specific needs and constraints.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 fadeInUp delay-2">
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3 class="feature-title">Implement</h3>
+            <p class="feature-desc">Expert guidance and support for implementing security controls, policies, and procedures to protect your digital evidence.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 fadeInUp delay-3">
+          <div class="feature-card text-center">
+            <div class="feature-icon">
+              <i class="fas fa-sync-alt"></i>
+            </div>
+            <h3 class="feature-title">Monitor & Improve</h3>
+            <p class="feature-desc">Ongoing monitoring, evaluation, and improvement of security measures to address evolving threats and challenges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-section bg-light">
+    <div class="container">
+      <div class="text-center mb-5 fadeInUp">
+        <h2 class="section-title mx-auto" style="width: fit-content;">Client Testimonials</h2>
+        <p class="lead">What our clients say about our security consulting services</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 fadeInUp">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              The security assessment conducted by Chain of Custody was thorough and insightful. Their recommendations helped us strengthen our digital evidence management processes and meet regulatory requirements. Their expertise in both security and forensics made a significant difference.
+            </div>
+            <div class="testimonial-author">
+              <img src="../static/images/person_1.jpg" alt="John Smith">
+              <div class="author-info">
+                <h4>John Smith</h4>
+                <p>Chief Security Officer, Law Enforcement Agency</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 fadeInUp delay-1">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              We engaged Chain of Custody to help us design a secure architecture for our digital evidence management system. Their consultants demonstrated exceptional knowledge and provided practical solutions that balanced security with usability. The result is a robust system that our team can confidently use.
+            </div>
+            <div class="testimonial-author">
+              <img src="../static/images/person_2.jpg" alt="Sarah Johnson">
+              <div class="author-info">
+                <h4>Sarah Johnson</h4>
+                <p>IT Director, Legal Services Firm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title fadeInUp">Ready to Enhance Your Security?</h2>
+      <p class="cta-desc fadeInUp delay-1">Contact our security consulting team today to discuss how we can help you protect your digital evidence and forensic processes.</p>
+      <a href="#" class="btn cta-btn fadeInUp delay-2">Contact Us</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Chain of Custody</h4>
+            <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+            <ul class="social-icons mt-4">
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="/login"><i class="fas fa-chevron-right"></i> Government Regulator</a></li>
+              <li><a href="/login_auth"><i class="fas fa-chevron-right"></i> Authorized Parties</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Our Services</h4>
+            <ul class="footer-links">
+              <li><a href="/digital-evidence-management"><i class="fas fa-chevron-right"></i> Digital Evidence Management</a></li>
+              <li><a href="/forensic-analysis"><i class="fas fa-chevron-right"></i> Forensic Analysis</a></li>
+              <li><a href="/blockchain-solutions"><i class="fas fa-chevron-right"></i> Blockchain Solutions</a></li>
+              <li><a href="/security-consulting"><i class="fas fa-chevron-right"></i> Security Consulting</a></li>
+              <li><a href="/training-certification"><i class="fas fa-chevron-right"></i> Training & Certification</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Tamilnadu, India</li>
+              <li><i class="fas fa-phone"></i> <a href="tel://1234567920">+ 1235 2355 98</a></li>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:info@chainofcustody.com">info@chainofcustody.com</a></li>
+              <li><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>© 2025 Chain of Custody. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Back to top button
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').addClass('active');
+      } else {
+        $('.back-to-top').removeClass('active');
+      }
+    });
+    
+    $('.back-to-top').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+    
+    // Animation on scroll
+    $(document).ready(function() {
+      $('.fadeInUp').addClass('fadeInUp');
+    });
+  </script>
+</body>
+</html>

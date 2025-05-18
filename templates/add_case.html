@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Case Registration - Chain of Custody</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case Registration for Government Regulators in the Chain of Custody System">
+
+  <meta property="og:title" content="Case Registration - Chain of Custody"/>
+  <meta property="og:image" content="../static/images/og-image.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content="Chain of Custody"/>
+  <meta property="og:description" content="Case Registration for Government Regulators in the Chain of Custody System"/>
+  <meta name="twitter:title" content="Case Registration - Chain of Custody" />
+  <meta name="twitter:image" content="../static/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #003333;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --info-color: #3498db;
+      --danger-color: #e74c3c;
+      --gov-color: #27ae60;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      background-color: var(--light-color);
+    }
+    
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background-color: var(--dark-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .navbar-brand:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: white;
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      color: white;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    .dropdown-menu {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+      margin-top: 15px;
+    }
+    
+    .dropdown-item {
+      padding: 10px 25px;
+      font-weight: 500;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: var(--primary-color);
+      padding-left: 30px;
+    }
+    
+    .dropdown-item i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    .form-section {
+      padding: 100px 0;
+    }
+    
+    .section-title {
+      margin-bottom: 40px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 15px;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--gov-color);
+    }
+    
+    .section-title p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 800px;
+    }
+    
+    .success-message {
+      background-color: rgba(39, 174, 96, 0.1);
+      border-left: 4px solid var(--success-color);
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      color: var(--success-color);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .success-message i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
+    .form-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .form-section-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--gov-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .form-section-text h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 0;
+    }
+    
+    .form-label {
+      font-weight: 500;
+      color: var(--secondary-color);
+      margin-bottom: 8px;
+    }
+    
+    .form-control {
+      height: 50px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--gov-color);
+      box-shadow: 0 0 0 0.25rem rgba(39, 174, 96, 0.25);
+    }
+    
+    textarea.form-control {
+      height: auto;
+      min-height: 120px;
+    }
+    
+    .form-select {
+      height: 50px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-select:focus {
+      border-color: var(--gov-color);
+      box-shadow: 0 0 0 0.25rem rgba(39, 174, 96, 0.25);
+    }
+    
+    .submit-btn {
+      height: 50px;
+      border-radius: 8px;
+      background-color: var(--gov-color);
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background-color: #219653;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-widget {
+      margin-bottom: 40px;
+    }
+    
+    .footer-widget h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-widget h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-widget p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .social-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .social-icons li {
+      margin-right: 15px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    .copyright p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+    
+    @media (max-width: 991px) {
+      .form-section {
+        padding: 80px 0;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .form-section {
+        padding: 60px 0;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .form-card {
+        padding: 20px;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fadeInUp {
+      animation: fadeInUp 1s ease;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+  </style>
+  
+  <script language="javascript">
+    function validate() {
+      if(document.form1.district.selectedIndex==0) {
+        alert("Select the District");
+        document.form1.district.focus();
+        return false;
+      }
+      if(document.form1.station.value=="") {
+        alert("Enter the Police Station Name");
+        document.form1.station.focus();
+        return false;
+      }
+      if(document.form1.title.value=="") {
+        alert("Enter the Title of the Complaint");
+        document.form1.title.focus();
+        return false;
+      }
+      if(document.form1.cdate.value=="") {
+        alert("Enter the Occurance Date");
+        document.form1.cdate.focus();
+        return false;
+      }
+      if(document.form1.details.value=="") {
+        alert("Enter the Complaint Details");
+        document.form1.details.focus();
+        return false;
+      }
+      
+      if(document.form1.name.value=="") {
+        alert("Enter the Name");
+        document.form1.name.focus();
+        return false;
+      }
+      if(document.form1.fname.value=="") {
+        alert("Enter the Father Name");
+        document.form1.fname.focus();
+        return false;
+      }
+      if(document.form1.gender.selectedIndex==0) {
+        alert("Select the Gender");
+        document.form1.gender.focus();
+        return false;
+      }
+      
+      if(document.form1.dob.value=="") {
+        alert("Enter the Date of Birth");
+        document.form1.dob.focus();
+        return false;
+      }
+      if(document.form1.address.value=="") {
+        alert("Enter the Address");
+        document.form1.address.focus();
+        return false;
+      }
+      if(document.form1.district2.selectedIndex==0) {
+        alert("Select the District");
+        document.form1.district2.focus();
+        return false;
+      }
+      if(document.form1.pincode.value=="") {
+        alert("Enter the Pincode");
+        document.form1.pincode.focus();
+        return false;
+      }
+      if(document.form1.mobile.value=="") {
+        alert("Enter the Mobile No.");
+        document.form1.mobile.focus();
+        return false;
+      }
+      if(isNaN(document.form1.mobile.value)) {
+        alert("Invalid Mobile No.");
+        document.form1.mobile.select();
+        return false;
+      }
+      if(document.form1.mobile.value.length!=10) {
+        alert("Mobile No. must be 10 digits!");
+        document.form1.mobile.select();
+        return false;
+      }
+      if(document.form1.email.value=="") {
+        alert("Enter the Email");
+        document.form1.email.focus();
+        return false;
+      }
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.form1.email.value)) {
+      
+      } else {
+        alert("Invalid E-mail!");
+        document.form1.email.select();
+        return false;
+      }
+      if(document.form1.aadhar.value=="") {
+        alert("Enter the Aadhar No.");
+        document.form1.aadhar.focus();
+        return false;
+      }
+      if(document.form1.location.value=="") {
+        alert("Enter the Location");
+        document.form1.location.focus();
+        return false;
+      }
+      if(document.form1.city.value=="") {
+        alert("Enter the City");
+        document.form1.city.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/admin">Government Regulator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Case Management
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/add_case"><i class="fas fa-plus-circle"></i> Register Case</a></li>
+              <li><a class="dropdown-item" href="/view_case"><i class="fas fa-list"></i> View Cases</a></li>
+              <li><a class="dropdown-item" href="/add_auth"><i class="fas fa-user-plus"></i> Create Authorized Parties</a></li>
+              <li><a class="dropdown-item" href="/view_auth"><i class="fas fa-users"></i> View Authorized Parties</a></li>
+              <li><a class="dropdown-item" href="/view_req"><i class="fas fa-envelope"></i> Requests</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/verify">Verify Evidence Integrity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="form-section">
+    <div class="container">
+      <div class="section-title fadeInUp">
+        <h2>Case Registration</h2>
+        <p>Register a new case in the Chain of Custody system. Please fill in all required information accurately.</p>
+      </div>
+      
+      {% if msg=="success" %}
+      <div class="success-message fadeInUp">
+        <i class="fas fa-check-circle"></i> Case registered successfully. Updating blockchain...
+        <iframe src="http://iotcloud.co.in/coc_chain/add_block.php?bc={{bc}}&data={{bdata}}" width="50" height="50" frameborder="0" style="display: none;"></iframe>
+        <script>
+          setTimeout(function () {
+            window.location.href= '/view_auth';
+          }, 3000);
+        </script>
+      </div>
+      {% endif %}
+      
+      <form name="form1" method="post" class="needs-validation">
+        <div class="form-card fadeInUp delay-1">
+          <div class="form-section-title">
+            <div class="form-section-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="form-section-text">
+              <h4>Police Station Information</h4>
+            </div>
+          </div>
+          
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label for="district" class="form-label">District <span class="text-danger">*</span></label>
+              <select id="district" name="district" class="form-select">
+                <option value="">-Select District-</option>
+                <option>Ariyalur</option>
+                <option>Chengalpattu</option>
+                <option>Chennai</option>
+                <option>Coimbatore</option>
+                <option>Cuddalore</option>
+                <option>Dharmapuri</option>
+                <option>Dindigul</option>
+                <option>Erode</option>
+                <option>Kallakurichi</option>
+                <option>Kanchipuram</option>
+                <option>Kanyakumari</option>	
+                <option>Karur</option>
+                <option>Krishnagiri</option>
+                <option>Madurai</option>
+                <option>Mayiladuthurai</option>
+                <option>Nagapattinam</option>
+                <option>Namakkal</option>
+                <option>Nilgiris</option>
+                <option>Perambalur</option>
+                <option>Pudukkottai</option>
+                <option>Ramanathapuram</option>
+                <option>Ranipet</option>
+                <option>Salem</option>
+                <option>Sivagangai</option>
+                <option>Tenkasi</option>
+                <option>Thanjavur</option>
+                <option>Theni</option>
+                <option>Thoothukudi</option>
+                <option>Tiruchirappalli</option>
+                <option>Tirunelveli</option>
+                <option>Tirupattur</option>
+                <option>Tiruppur</option>
+                <option>Tiruvallur</option>
+                <option>Tiruvannamalai</option>
+                <option>Tiruvarur</option>
+                <option>Vellore</option>
+                <option>Viluppuram</option>
+                <option>Virudhunagar</option>
+              </select>
+            </div>
+            
+            <div class="col-md-6">
+              <label for="station" class="form-label">Police Station Name <span class="text-danger">*</span></label>
+              <input type="text" id="station" name="station" class="form-control" placeholder="Enter police station name">
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-card fadeInUp delay-2">
+          <div class="form-section-title">
+            <div class="form-section-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="form-section-text">
+              <h4>Details of Complaint</h4>
+            </div>
+          </div>
+          
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label for="title" class="form-label">Title of the Complaint <span class="text-danger">*</span></label>
+              <input type="text" id="title" name="title" class="form-control" placeholder="Enter complaint title">
+            </div>
+            
+            <div class="col-md-6">
+              <label for="cdate" class="form-label">Occurrence Date <span class="text-danger">*</span></label>
+              <input type="date" id="cdate" name="cdate" class="form-control">
+            </div>
+            
+            <div class="col-md-12">
+              <label for="details" class="form-label">Complaint Details <span class="text-danger">*</span></label>
+              <textarea id="details" name="details" class="form-control" placeholder="Enter detailed description of the complaint"></textarea>
+            </div>
+            
+            <div class="col-md-12">
+              <label for="suspect" class="form-label">Suspect Details</label>
+              <textarea id="suspect" name="suspect" class="form-control" placeholder="Enter details about any suspects (if applicable)"></textarea>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-card fadeInUp delay-3">
+          <div class="form-section-title">
+            <div class="form-section-icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="form-section-text">
+              <h4>Complainant's Details</h4>
+            </div>
+          </div>
+          
+          <div class="row g-4">
+            <div class="col-md-4">
+              <label for="name" class="form-label">Complainant's Name <span class="text-danger">*</span></label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Enter full name">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="fname" class="form-label">Father/Mother's Name <span class="text-danger">*</span></label>
+              <input type="text" id="fname" name="fname" class="form-control" placeholder="Enter parent's name">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+              <select id="gender" name="gender" class="form-select">
+                <option value="">-Select Gender-</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="dob" class="form-label">Date of Birth <span class="text-danger">*</span></label>
+              <input type="date" id="dob" name="dob" class="form-control">
+            </div>
+            
+            <div class="col-md-8">
+              <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+              <input type="text" id="address" name="address" class="form-control" placeholder="Enter complete address">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="district2" class="form-label">District <span class="text-danger">*</span></label>
+              <select id="district2" name="district2" class="form-select">
+                <option value="">-Select District-</option>
+                <option>Ariyalur</option>
+                <option>Chengalpattu</option>
+                <option>Chennai</option>
+                <option>Coimbatore</option>
+                <option>Cuddalore</option>
+                <option>Dharmapuri</option>
+                <option>Dindigul</option>
+                <option>Erode</option>
+                <option>Kallakurichi</option>
+                <option>Kanchipuram</option>
+                <option>Kanyakumari</option>	
+                <option>Karur</option>
+                <option>Krishnagiri</option>
+                <option>Madurai</option>
+                <option>Mayiladuthurai</option>
+                <option>Nagapattinam</option>
+                <option>Namakkal</option>
+                <option>Nilgiris</option>
+                <option>Perambalur</option>
+                <option>Pudukkottai</option>
+                <option>Ramanathapuram</option>
+                <option>Ranipet</option>
+                <option>Salem</option>
+                <option>Sivagangai</option>
+                <option>Tenkasi</option>
+                <option>Thanjavur</option>
+                <option>Theni</option>
+                <option>Thoothukudi</option>
+                <option>Tiruchirappalli</option>
+                <option>Tirunelveli</option>
+                <option>Tirupattur</option>
+                <option>Tiruppur</option>
+                <option>Tiruvallur</option>
+                <option>Tiruvannamalai</option>
+                <option>Tiruvarur</option>
+                <option>Vellore</option>
+                <option>Viluppuram</option>
+                <option>Virudhunagar</option>
+              </select>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="pincode" class="form-label">Pincode <span class="text-danger">*</span></label>
+              <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Enter pincode">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="mobile" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+              <input type="text" id="mobile" name="mobile" maxlength="10" class="form-control" placeholder="Enter 10-digit mobile number">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Enter email address">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="aadhar" class="form-label">Aadhar Number <span class="text-danger">*</span></label>
+              <input type="text" id="aadhar" name="aadhar" maxlength="12" class="form-control" placeholder="Enter 12-digit Aadhar number">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+              <input type="text" id="location" name="location" class="form-control" placeholder="Enter location">
+            </div>
+            
+            <div class="col-md-4">
+              <label for="city" class="form-label">City <span class="text-danger">*</span></label>
+              <input type="text" id="city" name="city" class="form-control" placeholder="Enter city">
+            </div>
+          </div>
+        </div>
+        
+        <div class="row mt-4 fadeInUp delay-3">
+          <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            <button type="submit" name="btn" class="submit-btn" onClick="return validate()">
+              <i class="fas fa-save me-2"></i> Register Case
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Chain of Custody</h4>
+            <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+            <ul class="social-icons mt-4">
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/admin"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="/add_case"><i class="fas fa-chevron-right"></i> Register Case</a></li>
+              <li><a href="/view_case"><i class="fas fa-chevron-right"></i> View Cases</a></li>
+              <li><a href="/verify"><i class="fas fa-chevron-right"></i> Verify Evidence</a></li>
+              <li><a href="/logout"><i class="fas fa-chevron-right"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="footer-widget">
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Tamilnadu, India</li>
+              <li><i class="fas fa-phone"></i> <a href="tel://1234567920">+ 1235 2355 98</a></li>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:coc@info.com">coc@info.com</a></li>
+              <li><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>© 2025 Chain of Custody. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <script>
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').addClass('active');
+      } else {
+        $('.back-to-top').removeClass('active');
+      }
+    });
+    
+    $('.back-to-top').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+    
+    $(document).ready(function() {
+      $('.fadeInUp').addClass('fadeInUp');
+    });
+  </script>
+</body>
+</html>

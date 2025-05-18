@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Upload Evidence - Chain of Custody</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Upload Evidence in the Chain of Custody System">
+
+  
+  <meta property="og:title" content="Upload Evidence - Chain of Custody"/>
+  <meta property="og:image" content="../static/images/og-image.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content="Chain of Custody"/>
+  <meta property="og:description" content="Upload Evidence in the Chain of Custody System"/>
+  <meta name="twitter:title" content="Upload Evidence - Chain of Custody" />
+  <meta name="twitter:image" content="../static/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #003333;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+      --info-color: #3498db;
+      --danger-color: #e74c3c;
+      --auth-color: #9b59b6;  
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      background-color: var(--light-color);
+    }
+    
+ 
+    .navbar {
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+      background-color: var(--dark-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .navbar-brand:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: white;
+    }
+     
+    .navbar-toggler {
+      border: none;
+      color: white;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    
+    .upload-section {
+      padding: 100px 0;
+    }
+    
+    .case-header {
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .case-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .case-header h2 i {
+      margin-right: 10px;
+      color: var(--auth-color);
+    }
+    
+    .case-id-badge {
+      display: inline-block;
+      background-color: var(--auth-color);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-left: 15px;
+    }
+    
+   
+    .evidence-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--auth-color);
+    }
+    
+    .evidence-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    .evidence-item {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    
+    .evidence-label {
+      font-weight: 600;
+      color: var(--secondary-color);
+      min-width: 120px;
+      margin-right: 10px;
+    }
+    
+    .evidence-value {
+      color: #555;
+      flex: 1;
+      word-break: break-word;
+    }
+    
+    .evidence-date {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #eee;
+      padding-top: 10px;
+    }
+    
+    .evidence-date i {
+      margin-right: 5px;
+      color: var(--info-color);
+    }
+    
+    .evidence-action {
+      margin-top: 15px;
+    }
+    
+    .evidence-action-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .evidence-action-btn i {
+      margin-right: 8px;
+    }
+    
+    .evidence-action-btn:hover {
+      background-color: #2980b9;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+    
+    .evidence-action-btn.request {
+      background-color: var(--warning-color);
+    }
+    
+    .evidence-action-btn.request:hover {
+      background-color: #e67e22;
+    }
+    
+    .evidence-action-btn.download {
+      background-color: var(--success-color);
+    }
+    
+    .evidence-action-btn.download:hover {
+      background-color: #219653;
+    }
+    
+    .evidence-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 15px;
+      border-radius: 50px;
+      background-color: rgba(39, 174, 96, 0.1);
+      color: var(--success-color);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    
+    .evidence-status i {
+      margin-right: 8px;
+    }
+    
+     
+    .upload-form-card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 25px;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .upload-form-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    .upload-form-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .upload-form-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--auth-color);
+    }
+    
+    .form-label {
+      font-weight: 500;
+      color: var(--secondary-color);
+      margin-bottom: 8px;
+    }
+    
+    .form-control {
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--auth-color);
+      box-shadow: 0 0 0 0.25rem rgba(155, 89, 182, 0.25);
+    }
+    
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      padding: 10px 25px;
+      border-radius: 8px;
+      background-color: var(--auth-color);
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background-color: #8e44ad;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    
+    .success-message {
+      background-color: rgba(39, 174, 96, 0.1);
+      border-left: 4px solid var(--success-color);
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color: var(--success-color);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .success-message i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
+    .error-message {
+      background-color: rgba(231, 76, 60, 0.1);
+      border-left: 4px solid var(--danger-color);
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color: var(--danger-color);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .error-message i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
+  
+    .image-container {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      max-height: 400px;
+    }
+    
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+    
+    .image-container:hover img {
+      transform: scale(1.05);
+    }
+    
+    .image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 20px;
+      color: white;
+    }
+    
+    .image-overlay h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .image-overlay p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+    
+    
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    
+    .empty-state-icon {
+      font-size: 5rem;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+    
+    .empty-state h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    
+    .empty-state p {
+      color: #777;
+      margin-bottom: 0;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+     
+    .footer {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-widget {
+      margin-bottom: 40px;
+    }
+    
+    .footer-widget h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-widget h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-widget p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+    
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-info i {
+      margin-right: 10px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .social-icons {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .social-icons li {
+      margin-right: 15px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    .copyright p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+ 
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-5px);
+    }
+     
+    @media (max-width: 991px) {
+      .upload-section {
+        padding: 80px 0;
+      }
+      
+      .upload-form-card {
+        margin-top: 30px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .upload-section {
+        padding: 60px 0;
+      }
+      
+      .case-header h2 {
+        font-size: 1.8rem;
+      }
+      
+      .evidence-label {
+        min-width: 100px;
+      }
+    }
+     
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fadeInUp {
+      animation: fadeInUp 1s ease;
+    }
+    
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+  </style>
+
+  <script>
+    function validate() {
+      if(document.form1.details.value=="") {
+        alert("Please enter evidence details");
+        document.form1.details.focus();
+        return false;
+      }
+      if(document.form1.file.value=="") {
+        alert("Please select a file to upload");
+        document.form1.file.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/home">Authorized Party</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/a_view_case">Cases</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/a_req">Requests</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <section class="upload-section">
+    <div class="container">
+      
+      <div class="case-header fadeInUp">
+        <h2><i class="fas fa-folder-open"></i> Case Management <span class="case-id-badge">ID: {{case_id}}</span></h2>
+      </div>
+       
+      {% if msg=="req" %}
+        <div class="success-message fadeInUp">
+          <i class="fas fa-check-circle"></i> Download request has been sent successfully.
+          <iframe src="http://iotcloud.co.in/coc_chain/add_block.php?bc={{bc}}&data={{bdata}}" width="50" height="50" frameborder="0" style="display: none;"></iframe>
+          <script>
+            setTimeout(function () {
+              window.location.href= '/a_upload?cid={{cid}}';
+            }, 3000);
+          </script>
+        </div>
+      {% endif %}
+      
+      <div class="row">
+        
+        <div class="col-lg-7 fadeInUp">
+          <div class="mb-4">
+            <h3 class="mb-3">Evidence List</h3>
+          </div>
+          
+          {% if st=="1" %}
+            {% for rs2 in data2 %}
+              <div class="evidence-card fadeInUp delay-{{ loop.index % 3 + 1 }}">
+                <div class="evidence-item">
+                  <div class="evidence-label">ID:</div>
+                  <div class="evidence-value">{{rs2[0]}}</div>
+                </div>
+                <div class="evidence-item">
+                  <div class="evidence-label">Details:</div>
+                  <div class="evidence-value">{{rs2[2]}}</div>
+                </div>
+                <div class="evidence-item">
+                  <div class="evidence-label">File:</div>
+                  <div class="evidence-value">
+                    <i class="fas fa-file-alt me-2"></i>{{rs2[3]}}
+                  </div>
+                </div>
+                <div class="evidence-date">
+                  <i class="far fa-user me-1"></i> Uploaded by {{rs2[6]}} <span class="ms-3"><i class="far fa-calendar-alt"></i> {{rs2[4]}}</span>
+                </div>
+                <div class="evidence-action">
+                  {% if rs2[7]=="1" %}
+                    <a href="/down?eid={{rs2[0]}}&cid={{cid}}" class="evidence-action-btn download">
+                      <i class="fas fa-download"></i> Download
+                    </a>
+                  {% elif rs2[7]=="2" %}
+                    <span class="evidence-status">
+                      <i class="fas fa-clock"></i> Download Request Sent
+                    </span>
+                  {% else %}
+                    <a href="/a_upload?act=req&eid={{rs2[0]}}&cid={{cid}}" class="evidence-action-btn request">
+                      <i class="fas fa-paper-plane"></i> Request Download
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="image-container">
+              <img src="../static/images/coc4.jpg" alt="Chain of Custody" class="img-fluid">
+              <div class="image-overlay">
+                <h3>Digital Evidence Management</h3>
+                <p>Secure, transparent, and tamper-proof chain of custody for your digital evidence.</p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        
+         
+        <div class="col-lg-5 fadeInUp delay-2">
+          {% if data1[24]==1 %}
+            <div class="upload-form-card">
+              <h3>Upload Evidence</h3>
+              
+              {% if msg=="success" %}
+                <div class="success-message">
+                  <i class="fas fa-check-circle"></i> Evidence uploaded successfully.
+                  <iframe src="http://iotcloud.co.in/coc_chain/add_block.php?bc={{bc}}&data={{bdata}}" width="50" height="50" frameborder="0" style="display: none;"></iframe>
+                  <script>
+                    setTimeout(function () {
+                      window.location.href= '/a_upload?cid={{cid}}';
+                    }, 3000);
+                  </script>
+                </div>
+              {% endif %}
+              
+              {% if msg1=="attack" %}
+                <iframe src="http://iotcloud.co.in/coc_chain/add_block.php?bc={{bc}}&data={{bdata1}}" width="50" height="50" frameborder="0" style="display: none;"></iframe>
+                <script>
+                  setTimeout(function () {
+                    window.location.href= '/a_upload?cid={{cid}}';
+                  }, 3000);
+                </script>
+              {% endif %}
+              
+              <form name="form1" method="post" enctype="multipart/form-data">
+                <div class="mb-4">
+                  <label for="details" class="form-label">Details of Evidence</label>
+                  <textarea id="details" name="details" class="form-control" placeholder="Provide detailed description of the evidence..."></textarea>
+                </div>
+                
+                <div class="mb-4">
+                  <label for="file" class="form-label">Evidence File</label>
+                  <input type="file" id="file" name="file" class="form-control">
+                  <div class="form-text text-muted">
+                    Supported formats: Images, Documents, Audio, Video (Max size: 50MB)
+                  </div>
+                </div>
+                
+                <div class="text-end">
+                  <button type="submit" name="btn" class="submit-btn" onClick="return validate()">
+                    <i class="fas fa-cloud-upload-alt me-2"></i> Upload Evidence
+                  </button>
+                </div>
+              </form>
+            </div>
+          {% else %}
+            <div class="upload-form-card">
+              <div class="text-center py-4">
+                <div class="empty-state-icon">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <h3>Upload Restricted</h3>
+                <p>You don't have permission to upload evidence to this case. Please contact the case administrator if you believe this is an error.</p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+   
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Chain of Custody</h4>
+            <p>FB-CoC: Fuzzy Hash Blockchain based Chain of Custody to Secure Digital Evidence for Multimedia Forensics</p>
+            <ul class="social-icons mt-4">
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/home"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="/a_view_case"><i class="fas fa-chevron-right"></i> View Cases</a></li>
+              <li><a href="/a_req"><i class="fas fa-chevron-right"></i> Requests</a></li>
+              <li><a href="/logout"><i class="fas fa-chevron-right"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="footer-widget">
+            <h4>Contact Information</h4>
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Tamilnadu, India</li>
+              <li><i class="fas fa-phone"></i> <a href="tel://1234567920">+ 1235 2355 98</a></li>
+              <li><i class="fas fa-envelope"></i> <a href="mailto:coc@info.com">coc@info.com</a></li>
+              <li><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 5:00 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">
+        <p>© 2025 Chain of Custody. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+   
+  <script>
+     
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').addClass('active');
+      } else {
+        $('.back-to-top').removeClass('active');
+      }
+    });
+    
+    $('.back-to-top').click(function(e) {
+      e.preventDefault();
+      $('html, body').animate({scrollTop: 0}, 800);
+      return false;
+    });
+    
+   
+    $(document).ready(function() {
+ 
+      $('.fadeInUp').addClass('fadeInUp');
+    });
+  </script>
+</body>
+</html>

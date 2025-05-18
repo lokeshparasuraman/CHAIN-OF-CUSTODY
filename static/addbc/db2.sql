@@ -1,0 +1,36 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT;
+SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS;
+SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION;
+SET NAMES utf8mb4;
+
+CREATE TABLE `coc_chain` (
+  `id` int(11) NOT NULL,
+  `block_count` int(11) NOT NULL,
+  `pre_value` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `bcode` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `rdate` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `coc_chain_hash` (
+  `id` int(11) NOT NULL,
+  `bcode` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `hdata` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `vdata` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `coc_chain`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `coc_chain_hash`
+  ADD PRIMARY KEY (`id`);
+
+COMMIT;
+
+SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT;
+SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS;
+SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION;

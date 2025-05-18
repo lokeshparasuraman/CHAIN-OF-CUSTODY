@@ -1,0 +1,18 @@
+
+
+
+
+
+
+
+
+
+pip install mysql-connector
+python -m pip install --upgrade pip
+
+pip install flask 
+pip install seaborn
+pip install imagehash
+pip install opencv-python 
+pip install scikit plotly
+
